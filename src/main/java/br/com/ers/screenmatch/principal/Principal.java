@@ -8,8 +8,11 @@ import br.com.ers.screenmatch.service.APIConsumer;
 import br.com.ers.screenmatch.service.DataConvert;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -58,5 +61,19 @@ public class Principal {
                 .map(d -> new Episode(t.seasonNumber(),d))).collect(Collectors.toList());
 
         processedEpisodes.forEach(System.out::println);
+
+        System.out.println(" A partir de que ano vc deseja ver os episodios");
+        Integer year = Integer.valueOf(reader.nextLine());
+        reader.nextLine();
+        LocalDate findDate = LocalDate.of(year,1,1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        processedEpisodes.stream().filter(e -> e.getReleaseDate() != null &&
+                e.getReleaseDate().isAfter(findDate)).forEach( e -> System.out.println(
+                      "Temporada "+ e.getSeasonNumber()+
+                       " Episodio "+ e.getTitle()+
+                              " Data de Lançamento "+e.getReleaseDate().format(formatter)
+        ));
+
     }
 }
