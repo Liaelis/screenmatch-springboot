@@ -12,7 +12,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
@@ -26,5 +28,18 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 	principal.showMenu();
+	/*	List<String> nomes = Arrays.asList("Jacque", "Iasmin", "Paulo", "Rodrigo", "Nico");
+
+		nomes.stream()
+				.sorted()
+				.forEach(System.out::println);
+
+		nomes.stream()
+				.sorted()
+				.limit(3)
+				.filter(n -> n.startsWith("N"))
+				.map( n -> n.toUpperCase(Locale.ROOT))
+				.forEach(System.out::println);*/
+
 	}
 }
